@@ -9,8 +9,8 @@ example/例如:
 `./timer.exe -r "* 0/1 * * * *" -c "shutdown -s -t 60"`
 ***
 ## use config file (run more than one task) / 同时运行多个任务(使用配置文件)
-Use the parameter ` - f `to specify the location of the configuration file, for example `/ timer. exe -f cfg. txt`  
-使用参数`-f`指定配置文件，例如`./timer.exe -f cfg.txt`  
+Use the parameter ` - f `to specify the location of the configuration file, for example `/ timer. exe -f cfg. txt`*(recommended to use UTF-8)*  
+使用参数`-f`指定配置文件，例如`./timer.exe -f cfg.txt`*(如果不使用中文,推荐使用utf-8编码)*  
 
 The format of the config file like this:    
 配置文件的格式如下:
@@ -28,4 +28,6 @@ veeeeeery simple , download all files , and use `gcc timer.cpp`,done!
 ***
 # Other / 其他
 use [croncpp](github.com/mariusbancila/croncpp) and [cmdline](github.com/tanakh/cmdline) in `lib` dir  
-项目依赖了[croncpp](github.com/mariusbancila/croncpp)和[cmdline](github.com/tanakh/cmdline)，在`lib`文件夹中
+项目依赖了[croncpp](github.com/mariusbancila/croncpp)和[cmdline](github.com/tanakh/cmdline)，在`lib`文件夹中  
+
+* 如果需要在指令中使用中文，例如`satrt ./中文/中文文件.bat`,则可能需要将配置文件设置为gbk编码  
