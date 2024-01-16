@@ -7,6 +7,7 @@
 #include <sstream>
 #include <list>
 #include <thread>
+#include <chrono>
 
 #include "timer.h"
 #include "common.cpp"
@@ -53,13 +54,11 @@ void prc_main_loop(){
 
 int main(int argc, char *argv[]){
     system("chcp 65001");
-    
-
-    ark_timer_helper::parse_args(argc,argv);
-
     ark_lib::log::info(u8"start timer...");
-    proc_time = time(NULL);
     proc_status = 2;
+    ark_timer_helper::parse_args(argc,argv);
+    proc_time = time(NULL);
+    
     ark_lib::log::info(u8"现在时间 -> "+ark_timer_helper::get_show_time(proc_time));
     //
 //    task_list.push_back(timer_task("start cmd /k \"title w1\"","0/13 * * * * *"));
@@ -68,6 +67,17 @@ int main(int argc, char *argv[]){
     if(task_list.empty()){
         ark_lib::log::warning(u8"没有任何任务，程序退出...");
         exit(1);
+    }
+    if(proc_status==4){
+        ark_lib::log::warning(u8"命令测试模式 -> 执行所有命令...");
+        std::list<timer_task>::iterator itr;
+        for(itr = task_list.begin() ; itr!=task_list.end() ; itr++){
+            itr->do_it();
+        }
+        ark_lib::log::warning(u8"命令测试模式 -> 所有命令执行完成，闲置中，ctrl+c以退出...");
+        while(true){
+            std::this_thread::sleep_for(std::chrono::seconds(100));
+        }
     }
     ark_lib::log::info(u8"into main loop...");
     prc_main_loop();

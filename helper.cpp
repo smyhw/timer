@@ -63,6 +63,7 @@ namespace ark_timer_helper{
     void parse_args(int argc, char *argv[]){
         ark_lib::log::info(u8"开始处理配置...");
         cmdline::parser pr;
+        pr.add("test", '\0', u8"直接执行指令(用于测试变量环境等)");
         pr.add<std::string>("cron", 'r', u8"cron字符串", false,"none");
         pr.add<std::string>("cmd", 'c', u8"要执行的shell命令", false,"none");
         pr.add<std::string>("log", 'l', u8"日志文件位置(如果需要写入日志到文件)", false,"none");
@@ -99,6 +100,10 @@ namespace ark_timer_helper{
 
         if(pr.get<std::string>("log") != "none"){
             ark_lib::log::set_logfile(pr.get<std::string>("log"));
+        }
+
+        if(pr.exist("test")){
+            proc_status = 4;
         }
 
         ark_lib::log::info(u8"配置处理完毕...");

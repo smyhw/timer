@@ -1,7 +1,11 @@
 #pragma once
 #include <list>
+#include <thread>
 
-int proc_status;//程序状态
+//程序状态
+//2 = 正常运行
+//4 - 测试命令测试
+int proc_status;
 time_t proc_time;//处理时间
 
 class timer_task{
