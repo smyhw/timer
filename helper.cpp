@@ -85,7 +85,7 @@ namespace ark_timer_helper{
                 std::string cmd = "";
                 int zt = 0;//正在读取cron还是cmd?
                 for(int num=0;line[num]!='\n';num++){
-                    if(line[num]=='>'){num++;zt=1;}
+                    if(line[num]=='>' && zt==0){num++;zt=1;}
                     if(zt==1){
                         cmd+=line[num];
                     }else{
